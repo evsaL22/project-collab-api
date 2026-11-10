@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Project } from '../entities/project.entity';
-import { Member } from '../entities/member.entity';
+import { Project } from '../projects/entities/project.entity';
+import { Member } from '../members/entities/member.entity';
 import { ProjectMember, ProjectRole } from '../entities/project-member.entity';
-import { Task } from '../entities/task.entity';
+import { Task } from '../tasks/entities/task.entity';
 import { AddProjectMemberDto } from './dto/add-project-member.dto';
 import { UpdateProjectMemberDto } from './dto/update-project-member.dto';
 

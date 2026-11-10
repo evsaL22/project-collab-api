@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { FileMetadata } from '../entities/file-metadata.entity';
-import { Project } from '../entities/project.entity';
+import { FileMetadata } from './entities/file-metadata.entity';
+import { Project } from '../projects/entities/project.entity';
 import { ProjectMembersService } from '../project-members/project-members.service';
 import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';

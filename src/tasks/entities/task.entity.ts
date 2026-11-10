@@ -9,9 +9,9 @@ import {
   Relation,
   UpdateDateColumn,
 } from 'typeorm';
-import { Project } from './project.entity';
-import { Member } from './member.entity';
-import { Comment } from './comment.entity';
+import { Project } from '../../projects/entities/project.entity';
+import { Member } from '../../members/entities/member.entity';
+import { Comment } from '../../comments/entities/comment.entity';
 
 export enum TaskStatus {
   TODO = 'TODO',

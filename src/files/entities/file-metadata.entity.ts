@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   Relation,
 } from 'typeorm';
-import { Project } from './project.entity';
-import { Member } from './member.entity';
+import { Project } from '../../projects/entities/project.entity';
+import { Member } from '../../members/entities/member.entity';
 
 /** Metadata file saja (tanpa penyimpanan cloud), disimpan di tabel "files". */
 @Entity('files')

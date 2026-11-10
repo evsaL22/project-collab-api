@@ -8,8 +8,8 @@ import {
   Relation,
   UpdateDateColumn,
 } from 'typeorm';
-import { Task } from './task.entity';
-import { Member } from './member.entity';
+import { Task } from '../../tasks/entities/task.entity';
+import { Member } from '../../members/entities/member.entity';
 
 @Entity('comments')
 export class Comment {
