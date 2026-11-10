@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ProjectMember } from './project-member.entity';
+import { ProjectMember } from '../../project-members/entities/project-member.entity';
 
 @Entity('members')
 export class Member {

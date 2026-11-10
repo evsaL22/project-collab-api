@@ -6,9 +6,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { ProjectMember } from './project-member.entity';
-import { Task } from './task.entity';
-import { FileMetadata } from './file-metadata.entity';
+import { Task } from '../../tasks/entities/task.entity';
+import { FileMetadata } from '../../files/entities/file-metadata.entity';
 
 export enum ProjectStatus {
   ACTIVE = 'ACTIVE',
@@ -30,8 +29,8 @@ export class Project {
   @Column({ type: 'enum', enum: ProjectStatus, default: ProjectStatus.ACTIVE })
   status: ProjectStatus;
 
-  @OneToMany(() => ProjectMember, (pm) => pm.project)
-  projectMembers: ProjectMember[];
+  @OneToMany('ProjectMember', (pm: any) => pm.project)
+  projectMembers: any[];
 
   @OneToMany(() => Task, (task) => task.project)
   tasks: Task[];

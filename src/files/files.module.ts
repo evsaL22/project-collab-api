@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FileMetadata } from '../entities/file-metadata.entity';
-import { Project } from '../entities/project.entity';
+import { FileMetadata } from './entities/file-metadata.entity';
+import { Project } from '../projects/entities/project.entity';
 import { ProjectMembersModule } from '../project-members/project-members.module';
 import { FilesController } from './files.controller';
 import { FilesService } from './files.service';
