@@ -38,6 +38,6 @@ export class MembersController {
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
-    return this.membersService.remove(id);
+    return this.membersService.remove(id); // ini untuk remove data member berdasarkan id yang dikirimkan melalui parameter URL.
   }
 }
