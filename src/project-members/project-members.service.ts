@@ -3,20 +3,21 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Project } from '../projects/entities/project.entity';
-import { Member } from '../members/entities/member.entity';
-import { ProjectMember, ProjectRole } from '../entities/project-member.entity';
-import { Task } from '../tasks/entities/task.entity';
-import { AddProjectMemberDto } from './dto/add-project-member.dto';
-import { UpdateProjectMemberDto } from './dto/update-project-member.dto';
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { Project } from "../projects/entities/project.entity";
+import { Member } from "../members/entities/member.entity";
+import { ProjectMember, ProjectRole } from "./entities/project-member.entity";
+import { Task } from "../tasks/entities/task.entity";
+import { AddProjectMemberDto } from "./dto/add-project-member.dto";
+import { UpdateProjectMemberDto } from "./dto/update-project-member.dto";
 
 @Injectable()
 export class ProjectMembersService {
   constructor(
-    @InjectRepository(Project) private readonly projectRepo: Repository<Project>,
+    @InjectRepository(Project)
+    private readonly projectRepo: Repository<Project>,
     @InjectRepository(Member) private readonly memberRepo: Repository<Member>,
     @InjectRepository(ProjectMember)
     private readonly pmRepo: Repository<ProjectMember>,
@@ -25,7 +26,8 @@ export class ProjectMembersService {
 
   private async ensureProject(projectId: number) {
     const project = await this.projectRepo.findOneBy({ id: projectId });
-    if (!project) throw new NotFoundException(`Project ${projectId} tidak ditemukan`);
+    if (!project)
+      throw new NotFoundException(`Project ${projectId} tidak ditemukan`);
     return project;
   }
 
@@ -56,7 +58,8 @@ export class ProjectMembersService {
     await this.ensureProject(projectId);
 
     const member = await this.memberRepo.findOneBy({ id: dto.memberId });
-    if (!member) throw new NotFoundException(`Member ${dto.memberId} tidak ditemukan`);
+    if (!member)
+      throw new NotFoundException(`Member ${dto.memberId} tidak ditemukan`);
 
     const already = await this.pmRepo.exist({
       where: { projectId, memberId: dto.memberId },
@@ -82,11 +85,15 @@ export class ProjectMembersService {
     return this.pmRepo.find({
       where: { projectId },
       relations: { member: true },
-      order: { joinedAt: 'ASC' },
+      order: { joinedAt: "ASC" },
     });
   }
 
-  async updateRole(projectId: number, memberId: number, dto: UpdateProjectMemberDto) {
+  async updateRole(
+    projectId: number,
+    memberId: number,
+    dto: UpdateProjectMemberDto,
+  ) {
     const link = await this.findLink(projectId, memberId);
     link.role = dto.role;
     await this.pmRepo.save(link);
@@ -97,9 +104,14 @@ export class ProjectMembersService {
     const link = await this.findLink(projectId, memberId);
 
     // tugas yang di-assign ke member ini di project tsb dilepas (unassigned)
-    await this.taskRepo.update({ projectId, assigneeId: memberId }, { assigneeId: null });
+    await this.taskRepo.update(
+      { projectId, assigneeId: memberId },
+      { assigneeId: null },
+    );
 
     await this.pmRepo.remove(link);
-    return { message: `Member ${memberId} dikeluarkan dari project ${projectId}` };
+    return {
+      message: `Member ${memberId} dikeluarkan dari project ${projectId}`,
+    };
   }
 }
